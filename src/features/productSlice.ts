@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Product, initialState } from "../utils/interface";
 const dataFromLocalStorage = () => {
-  return {
-    products: [],
-    amount: 0,
-    price: 0,
-  };
+  return (
+    JSON.parse(localStorage.getItem("products")) || {
+      products: [],
+      amount: 0,
+      price: 0,
+    }
+  );
 };
 
 const productSlice = createSlice({
@@ -19,7 +21,7 @@ const productSlice = createSlice({
       if (item) {
         item.amount += payload.amount;
       } else {
-        state.products.push();
+        state.products.push(payload);
       }
       productSlice.caseReducers.calculaTotal(state);
     },
