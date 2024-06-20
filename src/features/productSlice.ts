@@ -19,7 +19,7 @@ const productSlice = createSlice({
       if (item) {
         item.amount += payload.amount;
       } else {
-        state.products.push(payload);
+        state.products.push();
       }
       productSlice.caseReducers.calculaTotal(state);
     },
